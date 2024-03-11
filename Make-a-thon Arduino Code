@@ -1,0 +1,135 @@
+//PRESSURE SENSORS 
+//red
+int pressureAnalogPin1 = A4; //Pin where our pressure pad is located.
+//yellow
+int pressureAnalogPin2 = A5;
+//green
+int pressureAnalogPin3 = A3; 
+int pressureReading1 = 0; // INT variable for storing our reading
+int pressureReading2 = 0; 
+int pressureReading3 = 0; 
+
+int noPressure = 70; //max value for no pressure on the pad
+int highPressure = 800; //max value for medium pressure on the pad
+
+//red 
+int LED1 = 6;
+//yellow 
+int LED2 = 7;
+//green  
+int LED3 = 8; 
+
+//DISTANCE SENSOR 
+//blue = LED4 Distance Sensor 
+const int PIN_TRIGGER4 = 9;
+const int PIN_ECHO4 = 10;
+int LED4 = 3; 
+//Conversion 
+double SPEED_SOUND_CM_ROOM_TEMP_FAHR1 = 0.03444;
+//Centimeter ranges
+int MIN_RANGE_CM = 0;
+int MAX_RANGE_CM = 5;
+
+//how far object is from sensors 
+//double distanceCm1=0;
+
+
+void setup() {
+  //PRESSURE SENSORS
+   // put your setup code here, to run once:
+  Serial.begin(9600); 
+  //inputs 
+  pinMode(pressureAnalogPin1, INPUT); 
+  pinMode(pressureAnalogPin2, INPUT);
+  pinMode(pressureAnalogPin3, INPUT); 
+  //outputs 
+  pinMode(LED1, OUTPUT); 
+  pinMode(LED2, OUTPUT);
+  pinMode(LED3, OUTPUT); 
+
+  //default to off 
+  digitalWrite(LED1, LOW);
+  digitalWrite(LED2, LOW); 
+  digitalWrite(LED3, LOW); 
+
+
+
+  //DISTANCE SENSORS 
+    //Serial.begin(9600);
+    //LED4 set up 
+  pinMode(PIN_TRIGGER4, OUTPUT);
+  pinMode(PIN_ECHO4, INPUT);
+
+  //LED start low 
+  pinMode(LED4, OUTPUT);
+  digitalWrite(LED4, LOW); 
+
+}
+
+void loop() {
+  //PRESSURE SENSORS 
+  // put your main code here, to run repeatedly:
+  pressureReading1 = analogRead(pressureAnalogPin1);
+  pressureReading2 = analogRead(pressureAnalogPin2);
+  pressureReading3 = analogRead(pressureAnalogPin3); 
+
+  //for pin1: red  
+  //Serial.println(String(pressureReading1)); 
+  if (pressureReading1 > noPressure && pressureReading1 < highPressure) {
+      digitalWrite(LED1, HIGH);
+      Serial.println("red on: " + String(pressureReading1));
+      
+  }
+  else {
+     digitalWrite(LED1, LOW);
+   }
+
+  //for pin2: yellow
+  //Serial.println(String(pressureReading2)); 
+  if (pressureReading2 > noPressure && pressureReading2 < highPressure) {
+      digitalWrite(LED2, HIGH);
+      Serial.println("yellow on: " + String(pressureReading2)); 
+   }
+  else {
+     digitalWrite(LED2, LOW);
+   }
+  //for pin3: green  
+  if (pressureReading3 > noPressure + 100 && pressureReading3 < highPressure) {
+      digitalWrite(LED3, HIGH);
+      Serial.println("green on: " + String(pressureReading3)); 
+   }
+  else {
+     digitalWrite(LED3, LOW);
+   }
+  
+
+  //DISTANCE SENSORS 
+    //start trigger for LED4
+    digitalWrite(PIN_TRIGGER4, LOW);  // prepare
+    delayMicroseconds(2);
+    digitalWrite(PIN_TRIGGER4, HIGH);  // prepare
+    delayMicroseconds(10);
+    digitalWrite(PIN_TRIGGER4, LOW);  // prepare
+
+   
+    int duration = pulseIn(PIN_ECHO4, HIGH);
+    int distanceCm = duration * 0.0343 / 2;
+
+    //LED4 
+    //Serial.print("Dist to object: ");
+    if (distanceCm <= MAX_RANGE_CM && distanceCm >= MIN_RANGE_CM) {  // sensor reports values in CM
+        digitalWrite(LED4, HIGH); 
+        Serial.print("blue on:" + distanceCm);
+    }
+    else {
+        digitalWrite(LED4, LOW); 
+        Serial.print("blue off");
+    }
+    
+    Serial.print(distanceCm);
+    //Serial.print(distanceCm2);
+    Serial.print(" cm");
+    Serial.println();
+    //delay(1000);
+    
+}
