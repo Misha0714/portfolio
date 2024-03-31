@@ -36,7 +36,9 @@ Technologies Used: R, ggplot2, maftools, DESeq2
 
 Usage Instructions: Instructions on accessing the dataset and running the visualization scripts.
 
+
 **Contact Information**
+
 Email: mfaruki@usc.edu
 
 LinkedIn: misha-faruki 
