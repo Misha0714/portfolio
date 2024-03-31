@@ -7,6 +7,7 @@ Welcome to my GitHub repository! Here, you'll find a collection of projects refl
 I am passionate about exploring the convergence of biology and technology, driven by the belief that innovative applications of AI and data analysis can revolutionize healthcare and beyond. As a student, I am eager to delve deeper into this intersection, whether through developing advanced AI systems or creating biomedical inventions.
 
 **Projects Overview**
+
 AI Image Classification: 
 
 Several of my projects center around leveraging Python's AI tools for image classification tasks. These projects not only showcase my proficiency in Python programming but also highlight my interest in applying AI techniques to real-world datasets. I believe that with the utilization of computer vision many doors open up when it comes to building the next big and impactful technologies. 
