@@ -16,7 +16,9 @@ In addition to AI-focused projects, I also explore data visualization techniques
 
 **Repository Contents**
 
-Identification Projects: AI Image Classification
+**Identification Projects**: 
+
+AI Image Classification:
 
 Description: Brief overview of the project and its objectives.
 Technologies Used: Python, TensorFlow, Pandas, Matplotlib, Numpy, Scikit-learn.
